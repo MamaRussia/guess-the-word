@@ -6,7 +6,7 @@ const dash = '_';
 
 
 function startGame() {
-    console.log('did it work');
+    console.log('did it work dues');
 }
 
 
