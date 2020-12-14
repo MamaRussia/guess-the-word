@@ -6,7 +6,7 @@ const dash = '_';
 
 
 function startGame() {
-    
+    console.log('did it work');
 }
 
 
@@ -18,7 +18,7 @@ document.onkeyup = function (e) {
     wordChoices[Math.floor(Math.random() * wordChoices.length)];
     console.log(computerGuess.length);
 
-    
+
 
 
     wordSpot.textContent = computerGuess;
