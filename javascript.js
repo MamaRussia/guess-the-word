@@ -54,7 +54,7 @@ document.onkeyup = function (e) {
   for (let i = 0; i < computerGuess.length; i++) {
     console.log(computerGuess.length);
     const wordLength = computerGuess.length;
-    const wordArray = [];
+    // const wordArray = [];
     console.log(wordLength);
     console.log(typeof wordLength);
     const dash = '_';
