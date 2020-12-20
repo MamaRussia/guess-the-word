@@ -24,45 +24,42 @@ const wordChoices = [
 const wordSpot = document.querySelector('#word-choice');
 const startBtn = document.querySelector('#start');
 const win = document.querySelector('#wins');
-const dash = '_';
 const lettersGuessed = [];
-const possibleGuesses = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+let word = [];
+let wordl = 0;
+const obfWord = [];
 
-console.log(wordChoices.length);
+function randomWord() {
+  return wordChoices[Math.floor(Math.random() * wordChoices.length)];
+}
 
-function generateWord() {
-  const wordSelected =
-    wordChoices[Math.floor(Math.random() * wordChoices.length)];
-  for (let i = 0; i < wordSelected.length; i++) {
-    console.log(wordSelected);
-
-    const underscore = ' ';
-    const nextChar = wordSelected.charAt(i) === underscore ? underscore : '_';
-    console.log(nextChar);
+function showLetter(data) {
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] === data) {
+      obfWord[i] = word[i];
+      wordl--;
+    }
   }
 }
 
-// adds word to display
-document.onkeyup = function (e) {
-  const userGuess = e.key;
-  console.log(e.key);
-  console.log(wordSpot);
-  const computerGuess =
-    wordChoices[Math.floor(Math.random() * wordChoices.length)];
-  console.log(computerGuess.length);
+function initGame() {
+  word = randomWord().split('');
+  console.log(word);
 
-  for (let i = 0; i < computerGuess.length; i++) {
-    console.log(computerGuess.length);
-    const wordLength = computerGuess.length;
-    const wordArray = [];
-    console.log(wordLength);
-    console.log(typeof wordLength);
-    const dash = '_';
+  wordl = word.length;
 
-    computerGuess.length.textContent = dash;
-    console.log(dash.length);
-    break;
+  for (let i = 0; i < word.length; i++) {
+    obfWord.push('_');
   }
 
-  wordSpot.textContent = computerGuess;
-};
+  showLetter(word[0]);
+  console.log(word);
+  showLetter(word[word.length - 1]);
+  // lettersGuessed.push(word[0]);
+  // lettersGuessed.push(word[word.length - 1]);
+}
+
+// adds word to display
+startBtn.addEventListener('click', function () {
+  wordSpot.textContent = initGame();
+});
