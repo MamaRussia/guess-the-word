@@ -21,8 +21,7 @@ const wordChoices = [
   'Feathered Peacock',
   'Mariachi',
 ];
-const wordSpot = document.querySelector('#word-choice');
-const startBtn = document.querySelector('#start');
+const startBtn = document.querySelector('.start');
 const win = document.querySelector('#wins');
 const lettersGuessed = [];
 let word = [];
@@ -45,11 +44,10 @@ function addDash() {
   console.log(arrayWord);
 
   arrayWord.forEach(addWord);
-  document.querySelector('#word-choice').innerHTML = wordArea;
+  document.querySelector('.word-choice').innerHTML = wordArea;
 }
 
 function hideStart() {
-  const startBtn = document.querySelector('button');
   startBtn.style.display = 'none';
 }
 
