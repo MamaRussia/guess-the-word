@@ -26,7 +26,7 @@ const startBtn = document.querySelector('#start');
 const win = document.querySelector('#wins');
 const lettersGuessed = [];
 let word = [];
-let wordl = 0;
+let wordArea = '';
 const obfWord = [];
 
 function randomWord() {
@@ -42,24 +42,46 @@ function showLetter(data) {
   }
 }
 
-function initGame() {
+function splitWord() {
   word = randomWord().split('');
-  console.log(word);
-
-  wordl = word.length;
 
   for (let i = 0; i < word.length; i++) {
     obfWord.push('_');
   }
 
-  showLetter(word[0]);
   console.log(word);
-  showLetter(word[word.length - 1]);
-  // lettersGuessed.push(word[0]);
-  // lettersGuessed.push(word[word.length - 1]);
+  const spaceWord = word.values();
+  console.log(spaceWord);
+
+  word.forEach(addWord);
+  document.querySelector('#word-choice').innerHTML = wordArea;
+
+  // word.forEach((e) => console.log(typeof e));
+  // word.forEach((e) => (wordSpot.innerHTML = e));
+}
+function addWord(v) {
+  wordArea = `${wordArea}${v}`;
 }
 
+function logKey(e) {
+  console.log(` ${e.code}`);
+  log.textContent += ` ${splitWord()}`;
+}
+
+document.addEventListener('keydown', logKey);
 // adds word to display
-startBtn.addEventListener('click', function () {
-  wordSpot.textContent = initGame();
-});
+// startBtn.addEventListener('mousedown', function () {
+//   wordSpot.textContent = splitWord();
+//   // console.log(wordSpot);
+//   // console.dir(word);
+//   // const onPage = JSON.stringify(word);
+//   // console.log(onPage);
+//   // console.dir(onPage);
+// });
+
+startBtn.addEventListener('mousedown', splitWord);
+
+function hideshow() {
+  document.getElementById('hidden-div').style.display = 'block';
+  this.style.display = 'none';
+}
