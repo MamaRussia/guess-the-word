@@ -27,61 +27,36 @@ const win = document.querySelector('#wins');
 const lettersGuessed = [];
 let word = [];
 let wordArea = '';
-const obfWord = [];
+const arrayWord = [];
 
 function randomWord() {
   return wordChoices[Math.floor(Math.random() * wordChoices.length)];
 }
 
-function showLetter(data) {
+function addWord(v) {
+  console.log(word);
+  wordArea = `${wordArea}${v}`;
+}
+
+function addDash() {
   for (let i = 0; i < word.length; i++) {
-    if (word[i] === data) {
-      obfWord[i] = word[i];
-      wordl--;
-    }
+    arrayWord.push('_ ');
   }
+  console.log(arrayWord);
+
+  arrayWord.forEach(addWord);
+  document.querySelector('#word-choice').innerHTML = wordArea;
+}
+
+function hideStart() {
+  const startBtn = document.querySelector('button');
+  startBtn.style.display = 'none';
 }
 
 function splitWord() {
   word = randomWord().split('');
-
-  for (let i = 0; i < word.length; i++) {
-    obfWord.push('_');
-  }
-
-  console.log(word);
-  const spaceWord = word.values();
-  console.log(spaceWord);
-
-  word.forEach(addWord);
-  document.querySelector('#word-choice').innerHTML = wordArea;
-
-  // word.forEach((e) => console.log(typeof e));
-  // word.forEach((e) => (wordSpot.innerHTML = e));
+  addDash();
+  hideStart();
 }
-function addWord(v) {
-  wordArea = `${wordArea}${v}`;
-}
-
-function logKey(e) {
-  console.log(` ${e.code}`);
-  log.textContent += ` ${splitWord()}`;
-}
-
-document.addEventListener('keydown', logKey);
-// adds word to display
-// startBtn.addEventListener('mousedown', function () {
-//   wordSpot.textContent = splitWord();
-//   // console.log(wordSpot);
-//   // console.dir(word);
-//   // const onPage = JSON.stringify(word);
-//   // console.log(onPage);
-//   // console.dir(onPage);
-// });
 
 startBtn.addEventListener('mousedown', splitWord);
-
-function hideshow() {
-  document.getElementById('hidden-div').style.display = 'block';
-  this.style.display = 'none';
-}
