@@ -25,6 +25,7 @@ const startBtn = document.querySelector('.start');
 const win = document.querySelector('#wins');
 const lettersGuessed = [];
 let word = [];
+const secretWord = '';
 let wordArea = '';
 const arrayWord = [];
 
@@ -34,7 +35,9 @@ function randomWord() {
 
 function addWord(v) {
   console.log(word);
-  wordArea = `${wordArea}${v}`;
+  wordArea = `${v}${wordArea}`;
+  const guessesLeft = word.length;
+  console.log(guessesLeft);
 }
 
 function addDash() {
@@ -55,6 +58,25 @@ function splitWord() {
   word = randomWord().split('');
   addDash();
   hideStart();
+}
+
+function askLetter(letter) {
+  letter = letter.toUpperCase();
+  let guessesLeft = word.length;
+  console.log(guessesLeft);
+
+  if (lettersGuessed.indexOf(letter) > -1) {
+    return;
+  }
+
+  lettersGuessed.push(letter);
+  const correct = secretWord.indexOf(letter) > -1;
+
+  if (!correct) {
+    guessesLeft -= 1;
+  }
+
+  return correct;
 }
 
 startBtn.addEventListener('mousedown', splitWord);
