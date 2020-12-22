@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Name That Yoga Pose!</title>
     <script src="./css.css"></script>
+     <!-- Bootstrap 4 CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   
 </head>
 <body>
    
     <div class="gameArea">
-        <div><h1><strong>Name that Yoga Pose!</strong></h1></div>
-        <p id="user-guess"></p>
-        <p class="word-choice"></p>
-        <p id="wins"></p>
-        <p id="log"></p>
+        <div><h1 class="text-center"><strong>Name that Yoga Pose!</strong></h1></div>
+        <div class="float-right">Wrong Guesses: <span id='mistakes'>0</span> of <span id='maxWrong'></span></div>
+        <p>Find Your Flow or Hang the Man:</p>
+        <p class="wordSpot">The word to be guessed goes here</p>
+        <p id="keyboard"></p>
         <button class="start" >START</button>
          </div>
     
