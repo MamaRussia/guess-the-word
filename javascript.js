@@ -1,37 +1,36 @@
 const wordChoices = [
-  'Handstand',
-  'Child Pose',
-  'Corpse',
-  'Warrior',
-  'Happy Baby',
-  'Frog',
-  'Pigeon',
-  'Upward Dog',
-  'Crane',
-  'Bow',
-  'Eagle',
-  'Wheel',
-  'Boat',
-  'Plow',
-  'Cow Face',
-  'Downward Dog',
-  'Bound Angle',
-  'Dolphin Plank',
-  'Extended Puppy',
-  'Feathered Peacock',
-  'Mariachi',
+  'handstand',
+  'headstand',
+  'corpse',
+  'warrior',
+  'mountain',
+  'frog',
+  'pigeon',
+  'chair',
+  'crane',
+  'bow',
+  'eagle',
+  'wheel',
+  'boat',
+  'plow',
+  'triangle',
+  'camel',
+  'crow',
+  'dolphin',
+  'bridge',
+  'headstand',
+  'mariachi',
 ];
 
 // eslint-disable-next-line
 let answer = '';
-// eslint-disable-next-line
-
 const maxWrong = 6;
 // eslint-disable-next-line
-
 let mistakes = 0;
-const lettersGuessed = [];
-const wordStatus = null;
+// eslint-disable-next-line
+let lettersGuessed = [];
+// eslint-disable-next-line
+let wordStatus = null;
 
 function randomWord() {
   answer = wordChoices[Math.floor(Math.random() * wordChoices.length)];
@@ -58,6 +57,7 @@ function generateButtons() {
   document.querySelector('.maxWrong').innerHTML = maxWrong;
 
   console.log(answer);
+  console.log(wordStatus);
 }
 
 function updateMistakes() {
@@ -80,7 +80,7 @@ function checkIfLost() {
 
 function guessedWord() {
   // eslint-disable-next-line
-  let wordStatus = answer
+  wordStatus = answer
     .split('')
     .map((letter) =>
       lettersGuessed.indexOf(letter) >= 0 ? lettersGuessed : ' _ '
@@ -91,9 +91,11 @@ function guessedWord() {
 }
 
 function handleGuess(chosenLetter) {
-  // lettersGuessed.indexOf(chosenLetter) === -1
-  //   ? lettersGuessed.push(chosenLetter)
-  //   : null;
+  lettersGuessed.indexOf(chosenLetter) === -1
+    ? lettersGuessed.push(chosenLetter)
+    : null;
+  console.log(lettersGuessed.indexOf(chosenLetter));
+  console.log(lettersGuessed);
   document.getElementById(chosenLetter).setAttribute('disabled', true);
 
   if (lettersGuessed.indexOf(chosenLetter) >= 0) {
