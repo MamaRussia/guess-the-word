@@ -122,7 +122,10 @@ document.querySelector('.maxWrong').innerHTML = maxWrong;
 
 function hideStart() {
   startBtn.setAttribute('hidden', true);
-  innerArea.setAttribute('hidden', false);
+}
+
+function showInnerArea() {
+  innerArea.setAttribute('invisible', true);
 }
 
 startBtn.addEventListener('mousedown', hideStart);
