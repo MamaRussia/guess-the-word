@@ -61,14 +61,13 @@ function handleGuess(chosenLetter) {
   lettersGuessed.indexOf(chosenLetter) === -1
     ? lettersGuessed.push(chosenLetter)
     : null;
-  console.log(lettersGuessed.indexOf(chosenLetter));
-  console.log(lettersGuessed);
+
   document.getElementById(chosenLetter).setAttribute('disabled', true);
 
-  if (lettersGuessed.indexOf(chosenLetter) >= 0) {
+  if (answer.indexOf(chosenLetter) >= 0) {
     guessedWord();
     checkIfWon();
-  } else if (lettersGuessed.indexOf(chosenLetter) === -1) {
+  } else if (answer.indexOf(chosenLetter) === -1) {
     mistakes++;
     updateMistakes();
     checkIfLost();
@@ -100,14 +99,20 @@ function checkIfLost() {
 
 function guessedWord() {
   // eslint-disable-next-line
-  wordStatus = answer
-    .split('')
-    .map((letter) =>
-      lettersGuessed.indexOf(letter) >= 0 ? lettersGuessed : ' _ '
-    )
-    .join('');
+  wordStatus = answer.split('').map(letter => (lettersGuessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
 
   document.querySelector('.wordSpot').innerHTML = wordStatus;
+}
+
+function newGame() {
+  mistakes = 0;
+  lettersGuessed = [];
+  document.querySelector('.hangmanImg').src = './images/0.jpg';
+
+  randomWord();
+  guessedWord();
+  updateMistakes();
+  generateButtons();
 }
 
 document.querySelector('.maxWrong').innerHTML = maxWrong;
