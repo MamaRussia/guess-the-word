@@ -53,7 +53,11 @@ function generateButtons() {
     )
     .join('');
 
-  document.getElementById('keyboard').innerHTML = buttonsHTML;
+  document.querySelector('.keyboard').innerHTML = buttonsHTML;
+}
+
+function updateHangmanPic() {
+  document.querySelector('.hangmanImg').src = `./images/${mistakes}.jpg`;
 }
 
 function updateMistakes() {
@@ -101,7 +105,7 @@ function handleGuess(chosenLetter) {
     mistakes++;
     updateMistakes();
     checkIfLost();
-    // updateHangmanPicture();
+    updateHangmanImg();
   }
 }
 
