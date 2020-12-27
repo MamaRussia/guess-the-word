@@ -1,39 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Name That Yoga Pose!</title>
-    <script src="./css.css"></script>
-    <!-- Bootstrap 4 CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-    <div class="b4">
+    <div class="container">
+        <h1 class="text-center"><strong>Name that Yoga Pose!</strong></h1>
+        <div class="text-center">
+            <div class="gameArea">
+                <img class="hangmanImg" src="./images/0.jpg" alt="post">
+                <br><br>
+                <h3>Find your flow or the man dies.</h3>
+                <br>
+                <div hidden class="innerArea">
+                    <h3 class="wordSpot">The word to be guessed goes here</h3>
+                    <div>
+                        Wrong Guesses: <span class="mistakes">0</span> of
+                        <span class="maxWrong"></span>
+                    </div>
+                    <br>
+                    <div class="keyboard"></div>
+                </div>
+                <button class="btn btn-lg btn-outline-primary start">Start</button>
+                <button hidden class="btn btn-lg btn-outline-primary new-game">New Game</button>
+            </div>
 
-
-
-
-
-    </div>
-
-    <div class="gameArea text-center">
-        <div>
-            <h1 class="text-center"><strong>Name that Yoga Pose!</strong></h1>
         </div>
-        <p>Find Your Flow or Hang the Man:</p>
-        <p class="wordSpot">The word to be guessed goes here</p>
-        <div>
-            Wrong Guesses: <span class="mistakes">0</span> of
-            <span class="maxWrong"></span>
-        </div>
-
-        <p class="keyboard"></p>
     </div>
-
+    <!-- Optional JavaScript -->
     <script src="./javascript.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -32,6 +32,8 @@ let mistakes = 0;
 let lettersGuessed = [];
 // eslint-disable-next-line
 let wordStatus = null;
+const startBtn = document.querySelector('.start');
+const innerArea = document.querySelector('.innerArea');
 
 function randomWord() {
   answer = wordChoices[Math.floor(Math.random() * wordChoices.length)];
@@ -44,7 +46,7 @@ function generateButtons() {
       (letter) =>
         `
       <button
-        class="btn btn-lg btn-primary m-2"
+        class="btn btn-lg btn-info m-2"
         id='${letter}'
         onClick="handleGuess('${letter}')"
       >
@@ -53,6 +55,7 @@ function generateButtons() {
     `
     )
     .join('');
+  console.log(answer);
 
   document.querySelector('.keyboard').innerHTML = buttonsHTML;
 }
@@ -116,6 +119,13 @@ function newGame() {
 }
 
 document.querySelector('.maxWrong').innerHTML = maxWrong;
+
+function hideStart() {
+  startBtn.setAttribute('hidden', true);
+  innerArea.setAttribute('hidden', false);
+}
+
+startBtn.addEventListener('mousedown', hideStart);
 
 randomWord();
 generateButtons();
