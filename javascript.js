@@ -24,7 +24,8 @@ const wordChoices = [
 
 // eslint-disable-next-line
 let answer = '';
-const maxWrong = 6;
+// eslint-disable-next-line
+let maxWrong = 6;
 // eslint-disable-next-line
 let mistakes = 0;
 // eslint-disable-next-line
@@ -56,7 +57,26 @@ function generateButtons() {
   document.querySelector('.keyboard').innerHTML = buttonsHTML;
 }
 
-function updateHangmanPic() {
+function handleGuess(chosenLetter) {
+  lettersGuessed.indexOf(chosenLetter) === -1
+    ? lettersGuessed.push(chosenLetter)
+    : null;
+  console.log(lettersGuessed.indexOf(chosenLetter));
+  console.log(lettersGuessed);
+  document.getElementById(chosenLetter).setAttribute('disabled', true);
+
+  if (lettersGuessed.indexOf(chosenLetter) >= 0) {
+    guessedWord();
+    checkIfWon();
+  } else if (lettersGuessed.indexOf(chosenLetter) === -1) {
+    mistakes++;
+    updateMistakes();
+    checkIfLost();
+    updateHangmanImg();
+  }
+}
+
+function updateHangmanImg() {
   document.querySelector('.hangmanImg').src = `./images/${mistakes}.jpg`;
 }
 
@@ -90,24 +110,7 @@ function guessedWord() {
   document.querySelector('.wordSpot').innerHTML = wordStatus;
 }
 
-function handleGuess(chosenLetter) {
-  lettersGuessed.indexOf(chosenLetter) === -1
-    ? lettersGuessed.push(chosenLetter)
-    : null;
-  console.log(lettersGuessed.indexOf(chosenLetter));
-  console.log(lettersGuessed);
-  document.getElementById(chosenLetter).setAttribute('disabled', true);
-
-  if (lettersGuessed.indexOf(chosenLetter) >= 0) {
-    guessedWord();
-    checkIfWon();
-  } else if (lettersGuessed.indexOf(chosenLetter) === -1) {
-    mistakes++;
-    updateMistakes();
-    checkIfLost();
-    updateHangmanImg();
-  }
-}
+document.querySelector('.maxWrong').innerHTML = maxWrong;
 
 randomWord();
 generateButtons();
