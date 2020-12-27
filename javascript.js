@@ -45,7 +45,7 @@ function generateButtons() {
       <button
         class="btn btn-lg btn-primary m-2"
         id='${letter}'
-        onClick='handleGuess("${letter}")'
+        onClick="handleGuess('${letter}')"
       >
         ${letter}
       </button>
@@ -53,11 +53,7 @@ function generateButtons() {
     )
     .join('');
 
-  document.querySelector('.keyboard').innerHTML = buttonsHTML;
-  document.querySelector('.maxWrong').innerHTML = maxWrong;
-
-  console.log(answer);
-  console.log(wordStatus);
+  document.getElementById('keyboard').innerHTML = buttonsHTML;
 }
 
 function updateMistakes() {
