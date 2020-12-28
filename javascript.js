@@ -39,6 +39,7 @@ const startImg = document.querySelector('.startImg');
 const newGame = document.querySelector('.new');
 const guess = document.querySelector('.guesses');
 const sound = document.querySelector('.sound');
+const lose = document.querySelector('.lose');
 
 function randomWord() {
   answer = wordChoices[Math.floor(Math.random() * wordChoices.length)];
@@ -93,6 +94,9 @@ function updateMistakes() {
 
 function checkIfWon() {
   if (wordStatus === answer) {
+    document.querySelector(
+      '.wordSpot'
+    ).innerHTML = `Way to go. It was ${answer}.`;
     document.querySelector('.keyboard').innerHTML = '<h2>Namaste</h2>';
     guess.setAttribute('hidden', true);
   }
@@ -100,9 +104,11 @@ function checkIfWon() {
 
 function checkIfLost() {
   if (mistakes === maxWrong) {
+    loseMusic();
+    stopMusic();
     document.querySelector(
       '.wordSpot'
-    ).innerHTML = `Oh no.<br>The correct answer was: ${answer}`;
+    ).innerHTML = `Oh no.<br>The correct answer was ${answer}`;
     document.querySelector('.keyboard').innerHTML =
       '<h2>A man is dead. Now what?</h2>';
     newGame.removeAttribute('hidden');
@@ -122,7 +128,8 @@ function resetGame() {
   lettersGuessed = [];
   document.querySelector('.hangmanImg').src = './images/0.jpg';
   newGame.setAttribute('hidden', true);
-
+  stopLoserMusic();
+  playMusic();
   randomWord();
   guessedWord();
   updateMistakes();
@@ -131,6 +138,16 @@ function resetGame() {
 
 function playMusic() {
   sound.play();
+}
+function stopMusic() {
+  sound.pause();
+}
+function stopLoserMusic() {
+  lose.pause();
+}
+
+function loseMusic() {
+  lose.play();
 }
 
 document.querySelector('.maxWrong').innerHTML = maxWrong;
