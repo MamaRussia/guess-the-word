@@ -34,6 +34,9 @@ let lettersGuessed = [];
 let wordStatus = null;
 const startBtn = document.querySelector('.start');
 const innerArea = document.querySelector('.innerArea');
+const hangmanImg = document.querySelector('.hangmanImg');
+const startImg = document.querySelector('.startImg');
+const newGame = document.querySelector('.new');
 
 function randomWord() {
   answer = wordChoices[Math.floor(Math.random() * wordChoices.length)];
@@ -94,9 +97,10 @@ function checkIfWon() {
 
 function checkIfLost() {
   if (mistakes === maxWrong) {
-    document.querySelector('.wordSpot').innerHTML = `The answer was: ${answer}`;
+    document.querySelector('.wordSpot').innerHTML = `Oh no. It was: ${answer}`;
     document.querySelector('.keyboard').innerHTML =
-      'The man is dead. Now what?';
+      '<h2>The man is dead. Now what?</h2>';
+    newGame.removeAttribute('hidden');
   }
 }
 
@@ -107,10 +111,11 @@ function guessedWord() {
   document.querySelector('.wordSpot').innerHTML = wordStatus;
 }
 
-function newGame() {
+function resetGame() {
   mistakes = 0;
   lettersGuessed = [];
   document.querySelector('.hangmanImg').src = './images/0.jpg';
+  newGame.setAttribute('hidden', true);
 
   randomWord();
   guessedWord();
@@ -121,14 +126,16 @@ function newGame() {
 document.querySelector('.maxWrong').innerHTML = maxWrong;
 
 function hideStart() {
+  const flow = document.querySelector('.flow');
   startBtn.setAttribute('hidden', true);
-}
-
-function showInnerArea() {
-  innerArea.setAttribute('invisible', true);
+  startImg.setAttribute('hidden', true);
+  flow.setAttribute('hidden', true);
+  hangmanImg.removeAttribute('hidden');
+  innerArea.removeAttribute('hidden');
 }
 
 startBtn.addEventListener('mousedown', hideStart);
+newGame.addEventListener('mousedown', resetGame);
 
 randomWord();
 generateButtons();
