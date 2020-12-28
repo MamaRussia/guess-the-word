@@ -40,6 +40,8 @@ const newGame = document.querySelector('.new');
 const guess = document.querySelector('.guesses');
 const sound = document.querySelector('.sound');
 const lose = document.querySelector('.lose');
+const win = document.querySelector('.win');
+const yell = document.querySelector('.yell');
 
 function randomWord() {
   answer = wordChoices[Math.floor(Math.random() * wordChoices.length)];
@@ -94,6 +96,7 @@ function updateMistakes() {
 
 function checkIfWon() {
   if (wordStatus === answer) {
+    playWin();
     document.querySelector(
       '.wordSpot'
     ).innerHTML = `Way to go. It was ${answer}.`;
@@ -104,6 +107,7 @@ function checkIfWon() {
 
 function checkIfLost() {
   if (mistakes === maxWrong) {
+    loseScream();
     loseMusic();
     stopMusic();
     document.querySelector(
@@ -139,6 +143,9 @@ function resetGame() {
 function playMusic() {
   sound.play();
 }
+function playWin() {
+  win.play();
+}
 function stopMusic() {
   sound.pause();
 }
@@ -148,6 +155,9 @@ function stopLoserMusic() {
 
 function loseMusic() {
   lose.play();
+}
+function loseScream() {
+  yell.play();
 }
 
 document.querySelector('.maxWrong').innerHTML = maxWrong;
