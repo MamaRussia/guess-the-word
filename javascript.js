@@ -37,6 +37,8 @@ const innerArea = document.querySelector('.innerArea');
 const hangmanImg = document.querySelector('.hangmanImg');
 const startImg = document.querySelector('.startImg');
 const newGame = document.querySelector('.new');
+const guess = document.querySelector('.guesses');
+const sound = document.querySelector('.sound');
 
 function randomWord() {
   answer = wordChoices[Math.floor(Math.random() * wordChoices.length)];
@@ -91,16 +93,20 @@ function updateMistakes() {
 
 function checkIfWon() {
   if (wordStatus === answer) {
-    document.querySelector('.keyboard').innerHTML = 'Namaste';
+    document.querySelector('.keyboard').innerHTML = '<h2>Namaste</h2>';
+    guess.setAttribute('hidden', true);
   }
 }
 
 function checkIfLost() {
   if (mistakes === maxWrong) {
-    document.querySelector('.wordSpot').innerHTML = `Oh no. It was: ${answer}`;
+    document.querySelector(
+      '.wordSpot'
+    ).innerHTML = `Oh no.<br>The correct answer was: ${answer}`;
     document.querySelector('.keyboard').innerHTML =
-      '<h2>The man is dead. Now what?</h2>';
+      '<h2>A man is dead. Now what?</h2>';
     newGame.removeAttribute('hidden');
+    guess.setAttribute('hidden', true);
   }
 }
 
@@ -123,6 +129,10 @@ function resetGame() {
   generateButtons();
 }
 
+function playMusic() {
+  sound.play();
+}
+
 document.querySelector('.maxWrong').innerHTML = maxWrong;
 
 function hideStart() {
@@ -132,6 +142,7 @@ function hideStart() {
   flow.setAttribute('hidden', true);
   hangmanImg.removeAttribute('hidden');
   innerArea.removeAttribute('hidden');
+  playMusic();
 }
 
 startBtn.addEventListener('mousedown', hideStart);
