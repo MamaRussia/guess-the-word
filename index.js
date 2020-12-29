@@ -22,6 +22,43 @@ const wordChoices = [
   'mariachi',
 ];
 
+const words = [
+  { word: 'handstand', hint: 'Gymnasts do these' },
+  { word: 'headstand', hint: 'Use your head' },
+  { word: 'corpse', hint: 'Found in a morgue' },
+  { word: 'warrior', hint: 'Proud soldier' },
+  { word: 'mountain', hint: 'People climb them' },
+  { word: 'frog', hint: 'Kiss to get warts' },
+  { word: 'pigeon', hint: 'Flying rats' },
+  { word: 'chair', hint: 'Great for butts' },
+  { word: 'crane', hint: 'Reach high places' },
+  { word: 'bow', hint: 'Used with arrows' },
+  { word: 'eagle', hint: 'Symbol of America' },
+  { word: 'wheel', hint: 'Goes round and round' },
+  { word: 'boat', hint: 'Titanic' },
+  { word: 'plow', hint: 'My ox does this' },
+  { word: 'triangle', hint: 'Half of a square' },
+  { word: 'camel', hint: 'Known for humps' },
+  { word: 'crow', hint: 'Black bird' },
+  { word: 'dolphin', hint: 'Smarter than humans' },
+  { word: 'bridge', hint: 'Trolls live under here' },
+  { word: 'mariachi', hint: 'Style of Mexican music' },
+  { word: 'firefly', hint: 'Glowing bug' },
+  { word: 'peacock', hint: 'Extra fancy bird' },
+  { word: 'scale', hint: 'Weigh stuff' },
+  { word: 'plank', hint: 'Core strength' },
+  {
+    word: 'locust',
+    hint: `'God's plague'`,
+  },
+  { word: 'noose', hint: 'Used for hanging' },
+  { word: 'child', hint: 'Cannot strike them' },
+  { word: 'cobra', hint: 'Dojo name' },
+  { word: 'cow', hint: 'Tip them for fun' },
+  { word: 'fish', hint: 'Teach a man to' },
+  { word: 'sphinx', hint: 'Solve his riddle' },
+];
+
 // eslint-disable-next-line
 let answer = '';
 // eslint-disable-next-line
@@ -44,6 +81,10 @@ const win = document.querySelector('.win');
 const yell = document.querySelector('.yell');
 
 function randomWord() {
+  // const index = Math.floor(words[0].length - 1);
+  // console.log(index);
+  // // const pick = words[index].word;
+  // console.log(pick);
   answer = wordChoices[Math.floor(Math.random() * wordChoices.length)];
 }
 
@@ -131,6 +172,7 @@ function resetGame() {
   mistakes = 0;
   lettersGuessed = [];
   document.querySelector('.hangmanImg').src = './images/0.jpg';
+  guess.removeAttribute('hidden');
   newGame.setAttribute('hidden', true);
   stopLoserMusic();
   playMusic();
