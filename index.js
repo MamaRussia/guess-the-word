@@ -74,10 +74,13 @@ const innerArea = document.querySelector('.innerArea');
 const hangmanImg = document.querySelector('.hangmanImg');
 const startImg = document.querySelector('.startImg');
 const newGame = document.querySelector('.new');
+const winBtn = document.querySelector('.winbtn');
 const guess = document.querySelector('.guesses');
 const sound = document.querySelector('.sound');
 const lose = document.querySelector('.lose');
 const win = document.querySelector('.win');
+const winMusic = document.querySelector('.winningsound');
+// const namaste = document.querySelector('.namaste');
 const yell = document.querySelector('.yell');
 
 function randomWord() {
@@ -143,6 +146,7 @@ function checkIfWon() {
     ).innerHTML = `Way to go. It was ${answer}.`;
     document.querySelector('.keyboard').innerHTML = '<h2>Namaste</h2>';
     guess.setAttribute('hidden', true);
+    winBtn.removeAttribute('hidden');
   }
 }
 
@@ -174,6 +178,7 @@ function resetGame() {
   document.querySelector('.hangmanImg').src = './images/0.jpg';
   guess.removeAttribute('hidden');
   newGame.setAttribute('hidden', true);
+  winBtn.setAttribute('hidden', true);
   stopLoserMusic();
   playMusic();
   randomWord();
@@ -186,13 +191,18 @@ function playMusic() {
   sound.play();
 }
 function playWin() {
+  sound.pause();
   win.play();
+  setTimeout(function () {
+    winMusic.play();
+  }, 2000);
 }
 function stopMusic() {
   sound.pause();
 }
 function stopLoserMusic() {
   lose.pause();
+  winMusic.pause();
 }
 
 function loseMusic() {
@@ -216,6 +226,7 @@ function hideStart() {
 
 startBtn.addEventListener('mousedown', hideStart);
 newGame.addEventListener('mousedown', resetGame);
+winBtn.addEventListener('mousedown', resetGame);
 
 randomWord();
 generateButtons();
