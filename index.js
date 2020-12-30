@@ -1,27 +1,20 @@
-const wordChoices = [
-  'handstand',
-  'headstand',
-  'corpse',
-  'warrior',
-  'mountain',
-  'frog',
-  'pigeon',
-  'chair',
-  'crane',
-  'bow',
-  'eagle',
-  'wheel',
-  'boat',
-  'plow',
-  'triangle',
-  'camel',
-  'crow',
-  'dolphin',
-  'bridge',
-  'headstand',
-  'mariachi',
-];
+// eslint-disable-next-line
+let answer = '', index, maxWrong = 6, mistakes = 0, lettersGuessed = [], wordStatus = null;
 
+const startBtn = document.querySelector('.start');
+const innerArea = document.querySelector('.innerArea');
+const hangmanImg = document.querySelector('.hangmanImg');
+const startImg = document.querySelector('.startImg');
+const newGame = document.querySelector('.new');
+const winBtn = document.querySelector('.winbtn');
+const guess = document.querySelector('.guesses');
+const sound = document.querySelector('.sound');
+const lose = document.querySelector('.lose');
+const win = document.querySelector('.win');
+const hintBtn = document.querySelector('.hint');
+const hintText = document.querySelector('.hintText');
+const winMusic = document.querySelector('.winningsound');
+const yell = document.querySelector('.yell');
 const words = [
   { word: 'handstand', hint: 'Gymnasts do these' },
   { word: 'headstand', hint: 'Use your head' },
@@ -49,7 +42,7 @@ const words = [
   { word: 'plank', hint: 'Core strength' },
   {
     word: 'locust',
-    hint: `'God's plague'`,
+    hint: "God's plague",
   },
   { word: 'noose', hint: 'Used for hanging' },
   { word: 'child', hint: 'Cannot strike them' },
@@ -59,52 +52,40 @@ const words = [
   { word: 'sphinx', hint: 'Solve his riddle' },
 ];
 
-// eslint-disable-next-line
-let answer = '';
-// eslint-disable-next-line
-let index;
-// eslint-disable-next-line
-let maxWrong = 6;
-// eslint-disable-next-line
-let mistakes = 0;
-// eslint-disable-next-line
-let lettersGuessed = [];
-// eslint-disable-next-line
-let wordStatus = null;
-const startBtn = document.querySelector('.start');
-const innerArea = document.querySelector('.innerArea');
-const hangmanImg = document.querySelector('.hangmanImg');
-const startImg = document.querySelector('.startImg');
-const newGame = document.querySelector('.new');
-const winBtn = document.querySelector('.winbtn');
-const guess = document.querySelector('.guesses');
-const sound = document.querySelector('.sound');
-const lose = document.querySelector('.lose');
-const win = document.querySelector('.win');
-const hintBtn = document.querySelector('.hint');
-const hintText = document.querySelector('.hintText');
-const winMusic = document.querySelector('.winningsound');
-// const namaste = document.querySelector('.namaste');
-const yell = document.querySelector('.yell');
-
 function randomWord() {
   index = words[Math.floor(Math.random() * words.length)];
   // eslint-disable-next-line
-  let hint = index.hint;
-  hintBtn.addEventListener('mousedown', function () {
-    document.querySelector('.hint').textContent = hint;
-  });
 }
 
-// setTimeout(showHint()
-//   document.querySelector('.hint').textContent = hint;
-// }, 2000);
 
-function showHint() {
-  document.querySelector('.hint').innerHTML = index.hint;
+
+function playMusic() {
+  sound.play();
 }
-function hideHint() {
-  document.querySelector('.hint').innerHTML = 'Hint';
+
+function playWin() {
+  sound.pause();
+  win.play();
+  setTimeout(function () {
+    winMusic.play();
+  }, 2000);
+}
+
+function stopMusic() {
+  sound.pause();
+}
+
+function stopLoserMusic() {
+  lose.pause();
+  winMusic.pause();
+}
+
+function loseMusic() {
+  lose.play();
+}
+
+function loseScream() {
+  yell.play();
 }
 
 function generateButtons() {
@@ -125,7 +106,6 @@ function generateButtons() {
     .join('');
   console.log(index.word);
   console.log(index.hint);
-
   document.querySelector('.keyboard').innerHTML = buttonsHTML;
 }
 
@@ -133,9 +113,7 @@ function handleGuess(chosenLetter) {
   lettersGuessed.indexOf(chosenLetter) === -1
     ? lettersGuessed.push(chosenLetter)
     : null;
-
   document.getElementById(chosenLetter).setAttribute('disabled', true);
-
   if (index.word.indexOf(chosenLetter) >= 0) {
     guessedWord();
     checkIfWon();
@@ -184,6 +162,21 @@ function checkIfLost() {
   }
 }
 
+function showHint() {
+  const { hint } = index;
+  hintBtn.addEventListener('click', function () {
+    document.querySelector('.hint').textContent = hint;
+    mistakes++;
+    document.querySelector('.mistakes').innerHTML = mistakes;
+
+    console.log(mistakes);
+  });
+}
+
+function hideHint() {
+  document.querySelector('.hint').innerHTML = 'Hint';
+}
+
 function guessedWord() {
   // eslint-disable-next-line
   wordStatus = index.word.split('').map(letter => (lettersGuessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
@@ -209,31 +202,6 @@ function resetGame() {
   hideHint();
 }
 
-function playMusic() {
-  sound.play();
-}
-function playWin() {
-  sound.pause();
-  win.play();
-  setTimeout(function () {
-    winMusic.play();
-  }, 2000);
-}
-function stopMusic() {
-  sound.pause();
-}
-function stopLoserMusic() {
-  lose.pause();
-  winMusic.pause();
-}
-
-function loseMusic() {
-  lose.play();
-}
-function loseScream() {
-  yell.play();
-}
-
 document.querySelector('.maxWrong').innerHTML = maxWrong;
 
 function hideStart() {
@@ -250,6 +218,7 @@ function hideStart() {
 startBtn.addEventListener('mousedown', hideStart);
 newGame.addEventListener('mousedown', resetGame);
 winBtn.addEventListener('mousedown', resetGame);
+hintBtn.addEventListener('click', showHint);
 
 randomWord();
 generateButtons();
