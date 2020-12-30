@@ -103,6 +103,9 @@ function randomWord() {
 function showHint() {
   document.querySelector('.hint').innerHTML = index.hint;
 }
+function hideHint() {
+  document.querySelector('.hint').innerHTML = 'Hint';
+}
 
 function generateButtons() {
   const buttonsHTML = 'abcdefghijklmnopqrstuvwxyz'
@@ -203,6 +206,7 @@ function resetGame() {
   guessedWord();
   updateMistakes();
   generateButtons();
+  hideHint();
 }
 
 function playMusic() {
