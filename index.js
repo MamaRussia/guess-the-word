@@ -62,6 +62,8 @@ const words = [
 // eslint-disable-next-line
 let answer = '';
 // eslint-disable-next-line
+let index;
+// eslint-disable-next-line
 let maxWrong = 6;
 // eslint-disable-next-line
 let mistakes = 0;
@@ -84,11 +86,8 @@ const winMusic = document.querySelector('.winningsound');
 const yell = document.querySelector('.yell');
 
 function randomWord() {
-  // const index = Math.floor(words[0].length - 1);
-  // console.log(index);
-  // // const pick = words[index].word;
-  // console.log(pick);
-  answer = wordChoices[Math.floor(Math.random() * wordChoices.length)];
+  index = words[Math.floor(Math.random() * words.length)];
+  const { hint } = index;
 }
 
 function generateButtons() {
@@ -107,7 +106,7 @@ function generateButtons() {
     `
     )
     .join('');
-  console.log(answer);
+  console.log(index.word);
 
   document.querySelector('.keyboard').innerHTML = buttonsHTML;
 }
@@ -119,10 +118,10 @@ function handleGuess(chosenLetter) {
 
   document.getElementById(chosenLetter).setAttribute('disabled', true);
 
-  if (answer.indexOf(chosenLetter) >= 0) {
+  if (index.word.indexOf(chosenLetter) >= 0) {
     guessedWord();
     checkIfWon();
-  } else if (answer.indexOf(chosenLetter) === -1) {
+  } else if (index.word.indexOf(chosenLetter) === -1) {
     mistakes++;
     updateMistakes();
     checkIfLost();
@@ -139,11 +138,11 @@ function updateMistakes() {
 }
 
 function checkIfWon() {
-  if (wordStatus === answer) {
+  if (wordStatus === index.word) {
     playWin();
     document.querySelector(
       '.wordSpot'
-    ).innerHTML = `Way to go. It was ${answer}.`;
+    ).innerHTML = `Way to go. It was ${index.word}.`;
     document.querySelector('.keyboard').innerHTML = '<h2>Namaste</h2>';
     guess.setAttribute('hidden', true);
     winBtn.removeAttribute('hidden');
@@ -157,7 +156,7 @@ function checkIfLost() {
     stopMusic();
     document.querySelector(
       '.wordSpot'
-    ).innerHTML = `Oh no.<br>The correct answer was ${answer}`;
+    ).innerHTML = `Oh no.<br>The correct answer was ${index.word}`;
     document.querySelector('.keyboard').innerHTML =
       '<h2>A man is dead. Now what?</h2>';
     newGame.removeAttribute('hidden');
@@ -167,7 +166,7 @@ function checkIfLost() {
 
 function guessedWord() {
   // eslint-disable-next-line
-  wordStatus = answer.split('').map(letter => (lettersGuessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
+  wordStatus = index.word.split('').map(letter => (lettersGuessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
 
   document.querySelector('.wordSpot').innerHTML = wordStatus;
 }
