@@ -91,14 +91,18 @@ function randomWord() {
   index = words[Math.floor(Math.random() * words.length)];
   // eslint-disable-next-line
   let hint = index.hint;
-  hintBtn.addEventListener('mousedown', function showHint() {
+  hintBtn.addEventListener('mousedown', function () {
     document.querySelector('.hint').textContent = hint;
   });
 }
 
-// function showHint() {
-//   document.querySelector('.hint').innerHTML = index.hint;
-// }
+// setTimeout(showHint()
+//   document.querySelector('.hint').textContent = hint;
+// }, 2000);
+
+function showHint() {
+  document.querySelector('.hint').innerHTML = index.hint;
+}
 
 function generateButtons() {
   const buttonsHTML = 'abcdefghijklmnopqrstuvwxyz'
@@ -156,6 +160,7 @@ function checkIfWon() {
     ).innerHTML = `Way to go. It was ${index.word}.`;
     document.querySelector('.keyboard').innerHTML = '<h2>Namaste</h2>';
     guess.setAttribute('hidden', true);
+    hintBtn.setAttribute('hidden', true);
     winBtn.removeAttribute('hidden');
   }
 }
@@ -172,6 +177,7 @@ function checkIfLost() {
       '<h2>A man is dead. Now what?</h2>';
     newGame.removeAttribute('hidden');
     guess.setAttribute('hidden', true);
+    hintBtn.setAttribute('hidden', true);
   }
 }
 
@@ -187,8 +193,10 @@ function resetGame() {
   lettersGuessed = [];
   document.querySelector('.hangmanImg').src = './images/0.jpg';
   guess.removeAttribute('hidden');
+  hintBtn.removeAttribute('hidden');
   newGame.setAttribute('hidden', true);
   winBtn.setAttribute('hidden', true);
+  winMusic.pause();
   stopLoserMusic();
   playMusic();
   randomWord();
