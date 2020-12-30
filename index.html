@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Name That Yoga Pose!</title>
+    <title>Yoga Pose Hangman!</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,7 +14,7 @@
 
 <body>
     <div class="container">
-        <h1 class="text-center"><strong>Name that Yoga Pose!</strong></h1>
+        <h1 class="text-center"><strong>Yoga Pose Hangman!</strong></h1>
         <div class="text-center">
             <div class="gameArea">
 
@@ -31,14 +31,16 @@
                         <span class="maxWrong"></span>
                     </div>
                     <br>
-                    <button style="color: red; font-weight: bold;" class="hint">Hint</button>
+                    <button onclick="showHint()" style="color: red; font-weight: bold;" class="hint">Hint</button>
                     <br><br>
                     <div class="keyboard"></div>
                 </div>
                 <button onclick="hideStart()" class="btn btn-lg btn-outline-primary start">Start</button>
                 <br>
-                <button hidden class="btn btn-lg btn-outline-primary new">Find Another Body?</button>
-                <button hidden class="btn btn-lg btn-outline-primary winbtn">Save Another Life?</button>
+                <button onclick="resetGame()" hidden class="btn btn-lg btn-outline-primary new">Find Another
+                    Body?</button>
+                <button onclick="resetGame()" hidden class="btn btn-lg btn-outline-primary winbtn">Save Another
+                    Life?</button>
             </div>
 
         </div>

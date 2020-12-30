@@ -54,10 +54,7 @@ const words = [
 
 function randomWord() {
   index = words[Math.floor(Math.random() * words.length)];
-  // eslint-disable-next-line
 }
-
-
 
 function playMusic() {
   sound.play();
@@ -107,6 +104,7 @@ function generateButtons() {
   console.log(index.word);
   console.log(index.hint);
   document.querySelector('.keyboard').innerHTML = buttonsHTML;
+  document.querySelector('.maxWrong').innerHTML = maxWrong;
 }
 
 function handleGuess(chosenLetter) {
@@ -164,13 +162,12 @@ function checkIfLost() {
 
 function showHint() {
   const { hint } = index;
-  hintBtn.addEventListener('click', function () {
-    document.querySelector('.hint').textContent = hint;
-    mistakes++;
-    document.querySelector('.mistakes').innerHTML = mistakes;
-
-    console.log(mistakes);
-  });
+  document.querySelector('.hint').textContent = hint;
+  mistakes++;
+  document.querySelector('.mistakes').innerHTML = mistakes;
+  setTimeout(function () {
+    hideHint();
+  }, 3000);
 }
 
 function hideHint() {
@@ -180,7 +177,6 @@ function hideHint() {
 function guessedWord() {
   // eslint-disable-next-line
   wordStatus = index.word.split('').map(letter => (lettersGuessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
-
   document.querySelector('.wordSpot').innerHTML = wordStatus;
 }
 
@@ -202,8 +198,6 @@ function resetGame() {
   hideHint();
 }
 
-document.querySelector('.maxWrong').innerHTML = maxWrong;
-
 function hideStart() {
   const flow = document.querySelector('.flow');
   startBtn.setAttribute('hidden', true);
@@ -214,11 +208,6 @@ function hideStart() {
   innerArea.removeAttribute('hidden');
   playMusic();
 }
-
-startBtn.addEventListener('mousedown', hideStart);
-newGame.addEventListener('mousedown', resetGame);
-winBtn.addEventListener('mousedown', resetGame);
-hintBtn.addEventListener('click', showHint);
 
 randomWord();
 generateButtons();
