@@ -81,14 +81,24 @@ const guess = document.querySelector('.guesses');
 const sound = document.querySelector('.sound');
 const lose = document.querySelector('.lose');
 const win = document.querySelector('.win');
+const hintBtn = document.querySelector('.hint');
+const hintText = document.querySelector('.hintText');
 const winMusic = document.querySelector('.winningsound');
 // const namaste = document.querySelector('.namaste');
 const yell = document.querySelector('.yell');
 
 function randomWord() {
   index = words[Math.floor(Math.random() * words.length)];
-  const { hint } = index;
+  // eslint-disable-next-line
+  let hint = index.hint;
+  hintBtn.addEventListener('mousedown', function showHint() {
+    document.querySelector('.hint').textContent = hint;
+  });
 }
+
+// function showHint() {
+//   document.querySelector('.hint').innerHTML = index.hint;
+// }
 
 function generateButtons() {
   const buttonsHTML = 'abcdefghijklmnopqrstuvwxyz'
@@ -107,6 +117,7 @@ function generateButtons() {
     )
     .join('');
   console.log(index.word);
+  console.log(index.hint);
 
   document.querySelector('.keyboard').innerHTML = buttonsHTML;
 }
@@ -216,6 +227,7 @@ document.querySelector('.maxWrong').innerHTML = maxWrong;
 function hideStart() {
   const flow = document.querySelector('.flow');
   startBtn.setAttribute('hidden', true);
+  hintText.setAttribute('hidden', true);
   startImg.setAttribute('hidden', true);
   flow.setAttribute('hidden', true);
   hangmanImg.removeAttribute('hidden');
